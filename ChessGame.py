@@ -91,11 +91,9 @@ class ChessGame:
                 )
 
                 if self.user_side == chess.WHITE:
-                    piece = self.board.piece_at(8 * rank + file)
+                    piece = self.board.piece_at(8 * (7 - rank) + file)
                 else:
-                    piece = self.board.piece_at(
-                        chess.square_mirror(8 * (7 - rank) + (7 - file))
-                    )
+                    piece = self.board.piece_at(8 * rank + (7 - file))
 
                 if piece:
                     image = self.pieces[str(piece)]
@@ -126,9 +124,10 @@ class ChessGame:
         Returns:
             int: The corresponding square on the chess board.
         """
-        return chess.square_mirror(
-            8 * (y // (self.height // 8)) + (x // (self.width // 8))
-        )
+        if self.user_side == chess.WHITE:
+            return 8 * (7 - y // (self.height // 8)) + (x // (self.width // 8))
+        else:
+            return 8 * (y // (self.height // 8)) + (7 - x // (self.width // 8))
 
     def display_message(self, screen: pygame.Surface, message: str, duration: int):
         """
@@ -164,6 +163,7 @@ class ChessGame:
             game_mode (int): The game mode. 1 for play vs. IA, 2 for IA vs. IA.
             user_side (bool, optional): The side of the user. chess.WHITE for white, chess.BLACK for black. Default is None.
         """
+        self.user_side = user_side
         running = True
         from_square = None
         to_square = None
@@ -181,16 +181,12 @@ class ChessGame:
                     ):
                         x, y = pygame.mouse.get_pos()
                         from_square = self.get_square_from_mouse(x, y)
-                        if user_side == chess.BLACK:
-                            from_square = chess.square_mirror(from_square)
                     elif (
                         event.type == pygame.MOUSEBUTTONUP
                         and self.board.turn == user_side
                     ):
                         x, y = pygame.mouse.get_pos()
                         to_square = self.get_square_from_mouse(x, y)
-                        if user_side == chess.BLACK:
-                            to_square = chess.square_mirror(to_square)
 
                         if from_square is not None and to_square is not None:
                             move = chess.Move(from_square, to_square)
