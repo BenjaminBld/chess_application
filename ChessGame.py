@@ -2,7 +2,6 @@ import pygame
 import chess
 import chess.engine
 import chess.svg
-from io import BytesIO
 import random
 import os
 from typing import Dict, Optional, Tuple
@@ -30,7 +29,11 @@ class ChessGame:
         Initializes the chess board, the AI engine, the game window, and loads the images for the chess pieces.
         """
         self.board = chess.Board()
-        self.engine = chess.engine.SimpleEngine.popen_uci("/usr/local/bin/stockfish")
+        # path to the stockfish executable file
+        # self.engine = chess.engine.SimpleEngine.popen_uci("/usr/local/bin/stockfish")
+        self.engine = chess.engine.SimpleEngine.popen_uci(
+            "./stockfish/stockfish-ubuntu-x86-64-avx2"
+        )
         self.width, self.height = 640, 640
         self.square_size = min(self.width, self.height) // 8
         self.clock = pygame.time.Clock()
