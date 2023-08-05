@@ -1,6 +1,6 @@
 # Python Chess Game
 
-This repository contains a simple chess game implemented in Python using Pygame for the graphical user interface and python-chess for the chess logic. The game supports player vs. AI mode as well as AI vs. AI mode. It uses the Stockfish chess engine for AI moves.
+This repository contains a simple chess game implemented in Python using Pygame for the graphical user interface, python-chess for the chess logic, and a custom AI logic for AI moves. The game supports player vs. AI mode as well as AI vs. AI mode.
 
 ## Installation
 
@@ -21,9 +21,8 @@ This application uses the Stockfish engine to calculate AI moves. You'll need to
 
 ### Step 4: Run the game script
 
-Use the command: python ChessGame.py
-or if you have both Python 2 and Python 3 installed, use: python3 ChessGame.py
-
+Use the command: 'python main.py'
+or if you have both Python 2 and Python 3 installed, use: 'python3 main.py'
 ## Gameplay
 
 The game starts with a menu that allows you to choose the mode of play. You can play against the AI or watch the AI play against itself. When playing against the AI, you also have the option to choose your side (white, black or random choice).
